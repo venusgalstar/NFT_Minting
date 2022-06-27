@@ -1,0 +1,347 @@
+@media (max-width: 1200px) {
+    .right_image {
+        width: 430px;
+        height: 430px;
+    }
+}
+
+
+@media (max-width: 1024px) {
+
+
+    .clanz_content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .clanz_content>.left {
+        margin-right: 0px;
+    }
+
+    .clanz_buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 70px;
+    }
+
+
+    .clanz_content>.right {
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+
+    .rhino-container {
+        flex-direction: column;
+    }
+
+
+    .rhino-container>.right {
+        margin-top: 20px;
+        width: 100%;
+        height: 100%;
+    }
+
+
+    .team-member {
+        padding-right: 100px;
+        padding-left: 100px;
+    }
+
+    .roadmap-row {
+        /* height: 100px; */
+    }
+
+    .roadmap-row>.fs-30 {
+        font-size: 22px;
+    }
+
+    .nft>.fs-35 {
+        font-size: 28px;
+    }
+
+
+    .btn_roadmap {
+        padding-top: 15px !important;
+        padding-bottom: 15px !important;
+        font-size: 20px !important;
+    }
+
+    .btn_collection {
+        font-size: 20px !important;
+        padding-top: 15px !important;
+        padding-bottom: 15px !important;
+    }
+
+    #section_clanz {
+        padding-right: 50px;
+        padding-left: 50px;
+    }
+
+    .padder-80 {
+        padding-right: 50px;
+        padding-left: 50px;
+    }
+
+    #sectoin_team {
+        padding-right: 50px;
+        padding-left: 50px;
+    }
+
+
+    #section_footer {
+        padding-right: 50px;
+        padding-left: 50px;
+    }
+
+}
+
+@media (max-width: 850px) {
+    .team-member {
+        padding-right: 50px;
+        padding-left: 50px;
+    }
+
+    .padder-50 {
+        padding-right: 40px;
+        padding-left: 40px;
+    }
+
+}
+
+
+
+@media (max-width: 700px) {
+
+    .rhino-container>.left {
+        width: 400px;
+        height: 400px;
+    }
+
+    .padder-50 {
+        padding-right: 35px;
+        padding-left: 35px;
+    }
+
+    #section_clanz {
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+
+    .padder-80 {
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+
+    #sectoin_team {
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+
+    #section_footer {
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+
+    .contract>.fs-30 {
+        font-size: 18px;
+    }
+
+    .team-member {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+    .mint-title {
+        font-size: 60px;
+        height: 100px;
+        line-height: 1.1;
+        text-align: center;
+        margin-bottom: 20px;
+        /* height: unset !important; */
+    }
+
+    .mint-subtitle {
+        font-size: 27px;
+
+    }
+}
+
+@media (max-width: 550px) {
+    .rhino-container>.left {
+        width: 330px;
+        height: 330px;
+    }
+
+    .contract>.fs-50 {
+        font-size: 40px;
+    }
+
+    .contract {
+        height: 120px;
+    }
+
+    .link>.fs-24 {
+        font-size: 20px;
+    }
+
+    .roadmap-row>.fs-30 {
+        font-size: 18px;
+    }
+
+    .nft>.fs-35 {
+        font-size: 22px;
+    }
+
+    .padder-50 {
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+
+    .team-member {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .padder-80 {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    #section_clanz {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .padder-80 {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    #sectoin_team {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    #section_footer {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    #section_roadmap>.title {
+        height: 224px;
+        font-size: 60px;
+    }
+
+    .rhino-item {
+        font-size: 32px;
+    }
+
+    .btn_roadmap {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+        font-size: 15px !important;
+    }
+
+    .btn_collection {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+        font-size: 15px !important;
+    }
+
+}
+
+@media (max-width: 450px) {
+    .mint-title {
+        text-align: center;
+        font-size: 50px;
+    }
+
+    .mint-subtitle {
+        font-size: 20px;
+    }
+
+    .clanz_content>.left>.fs-20 {
+        font-size: 16px;
+    }
+
+    .clanz_buttons {
+        margin-top: 40px;
+    }
+
+    .btn_roadmap {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+
+    .btn_collection {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+
+    .right_image {
+        width: 320px;
+        height: 320px;
+    }
+
+    .rhino-container {
+        padding: 20px 20px;
+    }
+
+    .rhino-container>.left {
+        width: 300px;
+        height: 300px;
+    }
+
+    .rhino-item {
+        font-size: 20px;
+        height: 50px;
+    }
+
+    #section_roadmap>.title {
+        height: 150px;
+        font-size: 60px;
+    }
+
+    .roadmap_index {
+        width: 50px;
+    }
+
+    .roadmap_item {
+        width: 50px;
+    }
+
+    .roadmap_row > .fs-30 {
+        font-size: 16px;
+    }
+
+    .nft > .fs-35 {
+        font-size: 20px;
+    }
+
+    .photo_item {
+        width: 150px;
+        height: 150px;
+    }
+
+    .contract > .fs-50 {
+        font-size: 30px;
+    }
+
+    .contract > .fs-30 {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 370px) {
+
+    .rhino-container>.left {
+        width: 270px;
+        height: 270px;
+    }
+}
