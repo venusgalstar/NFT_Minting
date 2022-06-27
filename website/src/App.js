@@ -7,7 +7,16 @@ import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { styled } from '@mui/material/styles';
 import Web3 from 'web3';
+import config from "./contract/config";
+import 'react-notifications/lib/notifications.css';
 
+const provider = Web3.providers.HttpProvider(config.testNetUrl);
+const web3 = new Web3(Web3.givenProvider ||provider);
+
+const MAX_APPROVE_VALUE = web3.utils.toWei(Number.MAX_SAFE_INTEGER.toString(), 'ether');
+
+const nftContract = new web3.eth.Contract(config.EvoNFTContractAbi, config.EvoNFTContractAddress);
+const tokenContract = new web3.eth.Contract(config.EvoTokenContractAbi, config.EvoTokenContractAddress);
 
 const connectTheme = createTheme({
   palette: {
@@ -33,7 +42,6 @@ const loadmapTheme = createTheme({
   }
 })
 
-
 const marks = [
   {
     value: 0,
@@ -44,8 +52,6 @@ const marks = [
     label: '20',
   }
 ];
-
-
 
 const PrettoSlider = styled(Slider)({
   color: '#f681b7',
@@ -104,33 +110,69 @@ function RoadMap(props) {
   );
 }
 
-const web3 = new Web3();
-
-
 function App() {
 
   const [count, setCount] = useState(20);
   const [account, setAccount] = useState();
-
-
+  const [chainId, setChainID] = useState();
 
   const handleChange = (event, newValue) => {
     setCount(newValue);
   };
 
+  if( window.ethereum ){
+
+    web3.eth.net.getId().then(networkID => {
+      setChainID(networkID);
+    });
+
+    window.ethereum.on('accountsChanged', function (accounts) {
+      setAccount(accounts[0]);
+    })
+  
+    window.ethereum.on('chainChanged', function (chainId) {
+      setChainID(chainId);
+      checkNetwork(chainId);
+      console.log(chainId);
+    });
+  }
+
+  const checkNetwork = (chainId) => {
+    if (web3.utils.toHex(chainId) !== web3.utils.toHex(config.chainId)) {
+      NotificationManager.info("Change network to Avalanche C Chain!", "Wrong network", 2000);
+    }
+  }
+  
+
   const connectWallet = async () => {
-    // var web3 = new Web3(web3)
+
     await window.ethereum.enable();
-    // const provider = Web3.providers.HttpProvider(config.testNetUrl);
-    const web3 = new Web3(Web3.givenProvider);
+
+    if (web3.utils.toHex(chainId) !== web3.utils.toHex(config.chainId)) {
+      NotificationManager.info("Change network to Avalanche C Chain!", "Wrong network", 2000);
+      return;
+    }
+
     web3.eth.getAccounts((err, accounts) => {
       setAccount(accounts[0]);
       console.log("account", accounts[0]);
     })
+
   }
 
-  const onMint = () => {
-    NotificationManager.info('Please connect wallet', "", 2000);
+  const onMint = async() => {
+
+    if( account === undefined )
+    {
+      NotificationManager.info('Please connect wallet', "", 2000);
+      return;
+    }
+
+    await tokenContract.methods.approve(config.EvoNFTContractAddress, MAX_APPROVE_VALUE).send(
+      { from: account }
+    );
+
+    await nftContract.methods.mint().send({from:account});
   }
 
   const List = [
@@ -142,7 +184,7 @@ function App() {
     { index: 6, content: " At 100% minted goes live rarity traits tools." },
     { index: 7, content: " Big prize for the holders" },
     { index: 8, content: " NFT stacking" },
-    { index: 9, content: "Buy Metaverse land for Cro Rhino Clanz Holder" },
+    { index: 9, content: "Buy Metaverse land for Rhino Clanz Holder" },
     { index: 10, content: "Try to be listed on CDC marketplace" },
     { index: 11, content: "Launch Baby Rhino Clanz (some rhino holders could recive for free)" },
 
@@ -167,10 +209,10 @@ function App() {
       <div id='section_mint'>
         <div >
           <div className='mint-title' >
-            Cro Rhino Clanz
+            Rhino Clanz
           </div>
           <div className='mint-subtitle'>
-            3333 Rhinos v2 on the Cronos Chain
+            3333 Rhinos v2 on the Ethereum Chain
           </div>
         </div>
         <div className='mint_pannel m-t-20'>
@@ -181,7 +223,7 @@ function App() {
             minted
           </div>
           <div className='c-w h-70 fs-32 flex align-center noto-bold font-bold'>
-            Price: {count * 50} CRO
+            Price: {count * 50} USDC.e
           </div>
           <div className='flex flex-col align-center justify-center h-100' >
             <PrettoSlider
@@ -201,21 +243,21 @@ function App() {
           </div>
           <div className='flex justify-center'>
             <ThemeProvider theme={mintTheme}>
-              <Button className='btn_mint font-bold' color='primary' variant='contained'>MINT</Button>
+              <Button className='btn_mint font-bold' color='primary' variant='contained' onClick={onMint}>MINT</Button>
             </ThemeProvider>
           </div>
         </div>
       </div>
       <div id='section_clanz'>
         <div className='title fs-40 c-w noto-bold font-extraBold'>
-          Cro Rhino Clanz
+         Rhino Clanz
         </div>
         <div className='clanz_content content-max'>
           <div className='left flex flex-col flex1'>
             <p className='fs-20 c-w'>
 
               Welcome to the Rhino Clanz. Rhino Clanz is a collection of 3333
-              unique NFT. CRC digital collectibles living on the Cronos
+              unique NFT. CRC digital collectibles living on the Ethereum
               Blockchain. Each Rhino Clanz is a unique non fungibles token (NFT),
               mix of various assets, colors, and backgrounds to make them unique.
               Rhino Clanz acts as an essential part of interacting within our
@@ -223,11 +265,11 @@ function App() {
               Future develop and perks will be released over time.
             </p>
             <p className='fs-20 c-w m-t-20'>
-              Holding Cro Rhino Clanz allows you to participate in the CRC event and
+              Holding Rhino Clanz allows you to participate in the CRC event and
               could win NFT, Merch and many others things after the public sale ends!
               Holders can vote for experiences, activations and campaigns that benefit
               the Rhino Clanz.<br />
-              The Cro Rhino Clanz (CRC) public sales opens on __ , FEBRUARY XXth
+              The Rhino Clanz (CRC) public sales opens on __ , FEBRUARY XXth
               around ____pm XXX.<br />
               Join the Rhino Clanz community on Twitter and Discord!
             </p>
@@ -433,7 +475,7 @@ function App() {
                 </div>
               </div>
               <div className='fs-30 m-l-10'>
-                Buy Metaverse land for Cro Rhino Clanz holder.
+                Buy Metaverse land for Rhino Clanz holder.
 
               </div>
             </div>
@@ -522,8 +564,8 @@ function App() {
           </div>
         </div>
       </div>
+      <NotificationContainer/>
     </>
-
   );
 }
 
